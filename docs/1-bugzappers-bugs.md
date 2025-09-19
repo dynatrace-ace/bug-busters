@@ -44,7 +44,6 @@ Let's create a debugging session:
 4. The code repository should populate automatically
 5. Set up a breakpoint on line 58 and try to clear the scores again. This should trigger the breakpoint and capture a snapshot. Let's see what the snapshot tells us about our `scores` variable.
 
-
 ---
 ### Step 3 — Fix it
 Notice the global variables `scores` is being initialized again as a local variable.
@@ -60,7 +59,7 @@ app.get('/api/clearScores', (req, res) => {
   res.json({ message: 'All scores cleared successfully' });
 });
 ```
-
+---
 </details> 
 <br>
 
@@ -73,8 +72,8 @@ Now click on `Past Game Stats` to view the past game stats. What do you notice?
 
 ***Hints***
 
-- Try to use the Distributed Tracing App to understand which API calls are being made. Filter on the `asteroids-game` service.
-- Go to the Asteroids Game service in the `Services` app and check out the Logs. Notice there are some failures. Press 'ctrl/cmd + K' in Dynatrace and type 'Services' to find the app
+- Try to use the Distributed Tracing App to understand which API calls are being made. Filter on the `bugzapper-game.bugzapper` service.
+- Go to the `bugzapper-game.bugzapper` Game service in the `Services` app and check out the Logs. Notice there are some failures. Press 'ctrl/cmd + K' in Dynatrace and type 'Services' to find the app
 - Based on the error logs, use the Live Debugger to set a breakpoint in the part of the code that is responsible for storing the game stats when a game ends.
 
 Did you find the bugs? Great job. Let's move on to the next app.
