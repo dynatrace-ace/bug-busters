@@ -93,7 +93,9 @@ From the `Services` app, navigate to the `bugzapper-game.bugzapper` service and 
 ---
 ### Step 2 — Let's debug
 
-Endpoint `/api/playerStats`
+Find the `/api/playerStats` endpoint and set a breakpoint.
+
+Try to play a game again and check the `View Past Game Stats` again. This should trigger the breakpoint and capture a snapshot. Let's see what the snapshot tells us about our `accuracy` variable.
 
 ![Snapshot](img/debugging-playerStats.png)
 
