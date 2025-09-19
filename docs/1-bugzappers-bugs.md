@@ -12,11 +12,57 @@ To start, play a game to make sure there are some top scores on the scoreboard:
 **Hints**
 
 - Try to clear the scores from the Top Scores. What do you notice?
-- Try to use the Distributed Tracing App to understand which API calls are being made. Filter on the `asteroids-game` service. Press 'ctrl/cmd + K' in Dynatrace and type 'Distributed Tracing' to find the app.
+- Try to use the Distributed Tracing App to understand which API calls are being made. Filter on the `bugzapper-game.bugzapper` service. Press 'ctrl/cmd + K' in Dynatrace and type 'Distributed Tracing' to find the app.
 
 ![Bug Service](img/bugzapper-service.png)
 
 - Use the Live Debugger to set a breakpoint in the part of the code that's responsible for clearing the scores. Press 'ctrl/cmd + K' in Dynatrace and type 'Live Debugger' to find the app. Click the purple pencil icon to set a Live Debugger filter. Use the `bugzapper` namespace as the filter. The source code repository should populate automatically. 
+
+<br>
+<details>
+<summary>Solution</summary>
+
+---
+### Step 1 — Find the exception
+After trying to clear the scores, you should have seen an error in the console. The error is caused by an incorrect initialization of the `scores` variable in the `clearScores` function.
+
+![Trace](img/clearScores_distributed-trace.png)
+
+---
+### Step 2 — Let's start our debugging session
+From the trace detail, we can see that the error occurs in the `clearScores` function on th `/app/server.js` file on line 58.
+
+Let's create a debugging session:
+1. Open the 'Live Debugger' app
+2. Match the following values:
+    - Namespace: `bugzapper`
+    - Properties: `k8s.workload.name:bugzapper`
+
+![Session](img/debugging_session.png)
+
+3. Click on Next & Done
+4. The code repository should populate automatically
+5. Set up a breakpoint on line 58 and try to clear the scores again. This should trigger the breakpoint and capture a snapshot. Let's see what the snapshot tells us about our `scores` variable.
+
+
+---
+### Step 3 — Fix it
+Notice the global variables `scores` is being initialized again as a local variable.
+
+![Snapshot](img/debugging_scores.png)
+
+```javascript
+// Clear all scores
+app.get('/api/clearScores', (req, res) => {
+  console.log('Scores before clearing:', scores);
+  let scores = []; <<-- Remove let to fix the bug
+  console.log('All scores cleared successfully');
+  res.json({ message: 'All scores cleared successfully' });
+});
+```
+
+</details> 
+<br>
 
 ## Bug 2: Why are the past game stats not showing up correctly?
 Now that you've played a game, you can view your game stats by clicking on the `View Game Stats` button.
@@ -32,6 +78,19 @@ Now click on `Past Game Stats` to view the past game stats. What do you notice?
 - Based on the error logs, use the Live Debugger to set a breakpoint in the part of the code that is responsible for storing the game stats when a game ends.
 
 Did you find the bugs? Great job. Let's move on to the next app.
+
+<br>
+<details>
+<summary>Solution</summary>
+
+Work in progress
+
+```bash
+echo "This works!"
+```
+
+</details> 
+<br>
 
 <div class="grid cards" markdown>
 - [Let's Find More Bugs in the Todo App:octicons-arrow-right-24:](2-todoapp-bugs.md)
