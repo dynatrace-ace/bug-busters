@@ -27,7 +27,11 @@ What happens?
 ### Step 1 — Find the endpoint
 When we click the 'Clear completed' button, a request is sent to the backend to clear the completed tasks. Let's use distributed tracing to find out which endpoint is being called.
 
-![Trace](img/clearCompleted_distributed-trace.png)
+![Trace](img/clearCompleted-distributed_trace.png)
+
+You can also check the logs:
+
+![Logs](img/clearCompleted-logs.png)
 
 ---
 ### Step 2 — Let's start our debugging session
@@ -38,12 +42,11 @@ Let's create a debugging session:
 2. Match the following values:
     - Namespace: `todoapp`
     - Properties: `k8s.workload.name:todoapp`
-
-![Session](img/debugging_session2.png)
-
 3. Click on Next & Done
 4. The code repository should populate automatically
 5. Set up a breakpoint and see what happens when you click the 'Clear completed' button.
+
+![Session](img/debugging-clearCompleted.png)
 
 ---
 ### Step 3 — Fixing the bug
@@ -100,23 +103,24 @@ What do you notice? Where is the bug?
 
 ---
 ### Step 1 — Find the endpoint
-Find the endpoint being called when you add a new todo task with special characters using distributed tracing. Notice the log content.
+Find the endpoint that is being called when you add a new todo task with special characters using distributed tracing. Notice the log content.
 
-![Trace](img/clearCompleted_distributed-trace.png)
+![Trace](img/todo-distributed_trace.png)
+
+Note: You can see the log content on the trace as long as you have log enrichment enabled.
 
 ---
 ### Step 2 — Let's debug
-We can see that the endpoint being called is `POST /todos`. Let's find this in the code and set a breakpoint to see why the tasks are not being cleared.
+We can see that the endpoint being called is `POST /todos`. Let's find this in the code and set a breakpoint to see what's happening with the task name:
 
 Hint: Notice what happens with the `todoTitle` variable.
 
-![Snapshot](img/debugging_todo.png)
+![Snapshot](img/debugging-todo.png)
 
 ---
 ### Step 3 — Fixing the bug
 Notice this two code lines:
 
-Before:
 ```java
 String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
 newTodoRecord.setTitle(todoTitle);

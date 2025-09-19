@@ -26,7 +26,7 @@ To start, play a game to make sure there are some top scores on the scoreboard:
 ### Step 1 — Find the exception
 After trying to clear the scores, you should have seen an error in the console. The error is caused by an incorrect initialization of the `scores` variable in the `clearScores` function.
 
-![Trace](img/clearScores_distributed-trace.png)
+![Trace](img/clearScores-distributed_trace.png)
 
 ---
 ### Step 2 — Let's start our debugging session
@@ -38,7 +38,7 @@ Let's create a debugging session:
     - Namespace: `bugzapper`
     - Properties: `k8s.workload.name:bugzapper`
 
-![Session](img/debugging_session.png)
+![Session](img/debugging_session-clearScores.png)
 
 3. Click on Next & Done
 4. The code repository should populate automatically
@@ -54,7 +54,8 @@ Notice the global variables `scores` is being initialized again as a local varia
 // Clear all scores
 app.get('/api/clearScores', (req, res) => {
   console.log('Scores before clearing:', scores);
-  let scores = []; <<-- Remove let to fix the bug
+  //let scores = [];
+  scores = [];
   console.log('All scores cleared successfully');
   res.json({ message: 'All scores cleared successfully' });
 });
@@ -82,12 +83,21 @@ Did you find the bugs? Great job. Let's move on to the next app.
 <details>
 <summary>Solution</summary>
 
-Work in progress
+---
+### Step 1 — Inspect the logs
+From the `Services` app, navigate to the `bugzapper-game.bugzapper` service and check out the logs. Notice there are some failures.
 
-```bash
-echo "This works!"
-```
 
+![Logs](img/playerStats-logs.png)
+
+---
+### Step 2 — Let's debug
+
+Endpoint `/api/playerStats`
+
+![Snapshot](img/debugging-playerStats.png)
+
+---
 </details> 
 <br>
 
