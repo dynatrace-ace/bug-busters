@@ -107,7 +107,7 @@ Find the endpoint that is being called when you add a new todo task with special
 
 ![Trace](img/todo-distributed_trace.png)
 
-Note: You can see the log content on the trace as long as you have log enrichment enabled.
+Note: You can see the log content on the trace if you have log enrichment enabled for that process group.
 
 ---
 ### Step 2 — Let's debug
