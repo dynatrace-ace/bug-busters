@@ -95,7 +95,7 @@ From the `Services` app, navigate to the `bugzapper-game.bugzapper` service and 
 
 Find the `/api/playerStats` endpoint and set a breakpoint.
 
-Try to play a game again and check the `View Past Game Stats` again. This should trigger the breakpoint and capture a snapshot. What happens when we calculate the `accuracy`?
+Try to play a new game and check the `View Past Game Stats` again. This should trigger the breakpoint and capture a snapshot. What happens when we calculate the `accuracy`?
 
 ![Snapshot](img/debugging-playerStats.png)
 

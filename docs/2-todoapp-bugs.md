@@ -110,7 +110,7 @@ Find the endpoint that is being called when you add a new todo task with special
 Note: You can see the log content on the trace as long as you have log enrichment enabled.
 
 ---
-### Step 3 — Fix it
+### Step 2 — Let's debug
 We can see that the endpoint being called is `POST /todos`. Let's find this in the code and set a breakpoint to see what's happening with the task name:
 
 Hint: Notice what happens with the `todoTitle` variable.
@@ -118,7 +118,7 @@ Hint: Notice what happens with the `todoTitle` variable.
 ![Snapshot](img/debugging-todo.png)
 
 ---
-### Step 3 — Fixing the bug
+### Step 3 — Fix it
 Notice this two code lines:
 
 ```java
