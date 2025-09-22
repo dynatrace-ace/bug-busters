@@ -33,6 +33,8 @@ You can also check the logs:
 
 ![Logs](img/clearCompleted-logs.png)
 
+Note: You can see the log content on the trace if you have [log enrichment](https://docs.dynatrace.com/docs/shortlink/lma-log-enrichment#enableenr) enabled for that process group.
+
 ---
 ### Step 2 — Let's start our debugging session
 We can see that the endpoint being called is `/todos/clear_completed`. Let's find this in the code and set a breakpoint to see why the tasks are not being cleared.
@@ -107,7 +109,7 @@ Find the endpoint that is being called when you add a new todo task with special
 
 ![Trace](img/todo-distributed_trace.png)
 
-Note: You can see the log content on the trace if you have log enrichment enabled for that process group.
+Note: You can see the log content on the trace if you have [log enrichment](https://docs.dynatrace.com/docs/shortlink/lma-log-enrichment#enableenr) enabled for that process group.
 
 ---
 ### Step 2 — Let's debug
