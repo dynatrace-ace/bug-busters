@@ -95,10 +95,30 @@ From the `Services` app, navigate to the `bugzapper-game.bugzapper` service and 
 
 Find the `/api/playerStats` endpoint and set a breakpoint.
 
-Try to play a game again and check the `View Past Game Stats` again. This should trigger the breakpoint and capture a snapshot. Let's see what the snapshot tells us about our `accuracy` variable.
+Try to play a game again and check the `View Past Game Stats` again. This should trigger the breakpoint and capture a snapshot. What happens when we calculate the `accuracy`?
 
 ![Snapshot](img/debugging-playerStats.png)
 
+---
+### Step 3 — Fix it
+ 
+The `bulletsFired` variable isn’t 0, but the error occurs because of a typo:
+
+> `bulletsfired` was used instead of `bulletsFired`
+
+
+```javascript
+  try {
+    //if (bulletsfired === 0) {
+    if (bulletsFired === 0) {
+      throw new Error("Cannot divide by zero!"); // Throws a new Error object
+    }
+    //accuracy = Math.max(0, Math.floor(asteroidsDestroyed / bulletsfired * 100));
+    accuracy = Math.max(0, Math.floor(asteroidsDestroyed / bulletsFired * 100));
+  } catch (error) {
+    console.error('Error calculating accuracy:', error);
+  }
+```
 ---
 </details> 
 <br>

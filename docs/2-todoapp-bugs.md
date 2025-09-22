@@ -49,7 +49,7 @@ Let's create a debugging session:
 ![Session](img/debugging-clearCompleted.png)
 
 ---
-### Step 3 — Fixing the bug
+### Step 3 — Fix it
 Notice that a new empty array list is being created and that's the one that is being cleared instead of the existing list of todos.
 
 Try fixing the code. Hint:
@@ -110,7 +110,7 @@ Find the endpoint that is being called when you add a new todo task with special
 Note: You can see the log content on the trace as long as you have log enrichment enabled.
 
 ---
-### Step 2 — Let's debug
+### Step 3 — Fix it
 We can see that the endpoint being called is `POST /todos`. Let's find this in the code and set a breakpoint to see what's happening with the task name:
 
 Hint: Notice what happens with the `todoTitle` variable.
